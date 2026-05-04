@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const GRADES = [
   "小学1年生", "小学2年生", "小学3年生",
@@ -17,6 +17,8 @@ const AREAS = [
 
 export default function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const mode = searchParams.get("mode") ?? "solo";
   const [nickname, setNickname] = useState("");
   const [grade, setGrade] = useState("");
   const [area, setArea] = useState("");
@@ -31,7 +33,6 @@ export default function RegisterPage() {
     sessionStorage.setItem("grade", grade);
     sessionStorage.setItem("area", area);
 
-    const mode = sessionStorage.getItem("mode") ?? "solo";
     router.push(mode === "battle" ? "/battle" : "/solo");
   };
 

@@ -1,15 +1,6 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Home() {
-  const router = useRouter();
-
-  const go = (mode: "solo" | "battle") => {
-    sessionStorage.setItem("mode", mode);
-    router.push("/register");
-  };
-
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-sky-400 to-sky-100 p-6">
       <div className="text-center mb-10">
@@ -21,21 +12,21 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col gap-5 w-full max-w-xs">
-        <button
-          onClick={() => go("solo")}
-          className="bg-white hover:bg-yellow-50 border-4 border-yellow-400 rounded-2xl py-5 text-xl font-black text-yellow-700 shadow-lg transition hover:scale-105 active:scale-95"
+        <Link
+          href="/register?mode=solo"
+          className="bg-white hover:bg-yellow-50 border-4 border-yellow-400 rounded-2xl py-5 text-xl font-black text-yellow-700 shadow-lg transition hover:scale-105 active:scale-95 text-center"
         >
           🏆 ひとりで挑戦
           <div className="text-sm font-normal text-gray-400 mt-1">47都道府県 制覇タイムを競おう</div>
-        </button>
+        </Link>
 
-        <button
-          onClick={() => go("battle")}
-          className="bg-white hover:bg-rose-50 border-4 border-rose-400 rounded-2xl py-5 text-xl font-black text-rose-600 shadow-lg transition hover:scale-105 active:scale-95"
+        <Link
+          href="/register?mode=battle"
+          className="bg-white hover:bg-rose-50 border-4 border-rose-400 rounded-2xl py-5 text-xl font-black text-rose-600 shadow-lg transition hover:scale-105 active:scale-95 text-center"
         >
           ⚔️ 2人バトル
           <div className="text-sm font-normal text-gray-400 mt-1">陣取り合戦！多く制覇した方が勝ち</div>
-        </button>
+        </Link>
       </div>
 
       <div className="mt-10 bg-white/60 rounded-2xl p-4 text-sm text-gray-600 max-w-xs text-center">
