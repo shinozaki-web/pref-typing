@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://placeholder.supabase.co";
+const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "placeholder";
 
 export const supabase = createClient(url, key);
 
@@ -44,5 +44,5 @@ export async function fetchRanking(): Promise<RankingRow[]> {
     .order("clear_time", { ascending: true })
     .limit(10);
   if (error) { console.error(error); return []; }
-  return (data ?? []) as RankingRow[];
+  return (data ?? []) as unknown as RankingRow[];
 }
