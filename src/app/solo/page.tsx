@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { PREFECTURES, PREFECTURE_MAP } from "@/lib/prefectures";
 import HintPanel from "@/components/HintPanel";
+import { saveScore } from "@/lib/supabase";
 
 // Web Audio API 効果音
 let audioCtx: AudioContext | null = null;
@@ -109,7 +110,6 @@ export default function SoloPage() {
 
   const endGame = useCallback((timeUp: boolean) => {
     clearInterval(timerRef.current!);
-    // BGMフェードアウト
     if (bgmRef.current) {
       const bgm = bgmRef.current;
       const fade = setInterval(() => {
@@ -118,13 +118,25 @@ export default function SoloPage() {
       }, 80);
     }
     const elapsed = Math.round((Date.now() - startTimeRef.current) / 1000) + penalty;
+    const completedCount = completed.length + (timeUp ? 0 : 1);
     sessionStorage.setItem("result", JSON.stringify({
       mode: "solo",
-      completed: completed.length + (timeUp ? 0 : 1), // 最後の1問は完了済みカウントに入る
+      completed: completedCount,
       totalTime: elapsed,
       penalty,
       timeUp,
     }));
+    const playerId = sessionStorage.getItem("playerId");
+    if (playerId) {
+      saveScore({
+        player_id: playerId,
+        mode: "solo",
+        clear_time: elapsed,
+        penalty_total: penalty,
+        completed_count: completedCount,
+        won: null,
+      });
+    }
     router.push("/result");
   }, [completed, penalty, router]);
 

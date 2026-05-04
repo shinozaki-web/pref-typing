@@ -5,10 +5,14 @@ const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(url, key);
 
-export interface Player {
-  id: string;
-  nickname: string;
-  grade: string;
+export async function savePlayer(nickname: string, grade: string): Promise<string | null> {
+  const { data, error } = await supabase
+    .from("pref_players")
+    .insert([{ nickname, grade }])
+    .select("id")
+    .single();
+  if (error) { console.error("player save error:", error); return null; }
+  return data?.id ?? null;
 }
 
 export interface ScoreRecord {
@@ -25,14 +29,20 @@ export async function saveScore(record: ScoreRecord) {
   if (error) console.error("score save error:", error);
 }
 
-export async function fetchRanking(mode: "solo" | "battle") {
+export interface RankingRow {
+  clear_time: number;
+  penalty_total: number;
+  pref_players: { nickname: string; grade: string } | null;
+}
+
+export async function fetchRanking(): Promise<RankingRow[]> {
   const { data, error } = await supabase
     .from("pref_scores")
-    .select("*, pref_players(nickname, grade)")
-    .eq("mode", mode)
-    .eq("completed_count", 47)
+    .select("clear_time, penalty_total, pref_players(nickname, grade)")
+    .eq("mode", "solo")
+    .eq("completed_count", 41)
     .order("clear_time", { ascending: true })
     .limit(10);
   if (error) { console.error(error); return []; }
-  return data ?? [];
+  return (data ?? []) as RankingRow[];
 }
