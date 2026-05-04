@@ -142,6 +142,23 @@ export default function BattlePage() {
       .replace(/oo/g, "o")
       .replace(/ou/g, "o");
 
+  const isValidPrefix = (input: string, target: string): boolean => {
+    const normalized = normalizeRomaji(input);
+    if (target.startsWith(normalized)) return true;
+    if (input.length === 0) return false;
+    const last = input[input.length - 1];
+    const stemNorm = normalizeRomaji(input.slice(0, -1));
+    if (!target.startsWith(stemNorm)) return false;
+    const nextChar = target[stemNorm.length];
+    const pending: Record<string, string[]> = {
+      t: ["c", "t"],
+      s: ["s"],
+      n: ["n"],
+      o: ["o"],
+    };
+    return (pending[last] ?? []).includes(nextChar);
+  };
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!currentId) return;
     const val = normalizeRomaji(e.target.value);
@@ -150,7 +167,7 @@ export default function BattlePage() {
     if (!pref) return;
     if (val === pref.romaji) {
       getSocket().emit("answer_correct", { code: roomCodeRef.current });
-    } else if (!pref.romaji.startsWith(val)) {
+    } else if (!isValidPrefix(e.target.value.toLowerCase().replace(/\s/g, ""), pref.romaji)) {
       setMissFlash(true);
       setTimeout(() => setMissFlash(false), 300);
       setTimeout(() => setInput(""), 50);

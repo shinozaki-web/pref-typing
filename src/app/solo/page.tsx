@@ -224,6 +224,24 @@ export default function SoloPage() {
       .replace(/oo/g, "o")
       .replace(/ou/g, "o");
 
+  // "tot" → "tochigi" のように、変換途中の末尾1文字を考慮したprefixチェック
+  const isValidPrefix = (input: string, target: string): boolean => {
+    const normalized = normalizeRomaji(input);
+    if (target.startsWith(normalized)) return true;
+    if (input.length === 0) return false;
+    const last = input[input.length - 1];
+    const stemNorm = normalizeRomaji(input.slice(0, -1));
+    if (!target.startsWith(stemNorm)) return false;
+    const nextChar = target[stemNorm.length];
+    const pending: Record<string, string[]> = {
+      t: ["c", "t"], // ti→chi, tu→tsu
+      s: ["s"],       // si→shi
+      n: ["n"],       // nn→n
+      o: ["o"],       // oo/ou→o
+    };
+    return (pending[last] ?? []).includes(nextChar);
+  };
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!currentId) return;
     const val = normalizeRomaji(e.target.value);
@@ -238,7 +256,7 @@ export default function SoloPage() {
       setCompleted(prev => [...prev, currentId]);
       nextPref();
       if (completed.length + 1 >= QUIZ_COUNT) endGame(false);
-    } else if (!pref.romaji.startsWith(val)) {
+    } else if (!isValidPrefix(e.target.value.toLowerCase().replace(/\s/g, ""), pref.romaji)) {
       // ミス
       playMiss();
       setMissFlash(true);
