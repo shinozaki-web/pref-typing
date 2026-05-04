@@ -300,7 +300,7 @@ export default function SoloPage() {
         <div className="w-full lg:w-80 flex flex-col justify-center items-center gap-5 p-6 bg-white/80 backdrop-blur shadow-xl">
           <div className="text-center">
             <div className="text-5xl mb-2">🗾</div>
-            <h1 className="text-2xl font-black text-sky-800 mb-1">都道府県タイピング</h1>
+            <h1 className="text-2xl font-black text-sky-800 mb-1">ニッポン博士への道</h1>
             <p className="text-sky-600 text-sm">制限時間5分・{QUIZ_COUNT}県を制覇しよう！</p>
           </div>
 

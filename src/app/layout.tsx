@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "都道府県タイピング",
-  description: "日本地図を塗りつくせ！47都道府県タイピングゲーム",
+  title: "ニッポン博士への道",
+  description: "47都道府県をタイピングして日本の名産・歴史を学ぼう！",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

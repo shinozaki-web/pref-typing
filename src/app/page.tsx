@@ -6,7 +6,7 @@ export default function Home() {
       <div className="text-center mb-10">
         <div className="text-6xl mb-3">🗾</div>
         <h1 className="text-4xl font-black text-white drop-shadow-md tracking-wide">
-          都道府県タイピング
+          ニッポン博士への道
         </h1>
         <p className="text-sky-100 mt-2 text-lg">日本地図を全部塗りつくせ！</p>
       </div>
