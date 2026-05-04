@@ -53,7 +53,7 @@ export default function RegisterPage() {
               onChange={e => setNickname(e.target.value)}
               placeholder="例: たろう"
               maxLength={10}
-              className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:border-sky-400 outline-none"
+              className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:border-sky-400 outline-none text-gray-900"
             />
           </div>
 
@@ -62,7 +62,7 @@ export default function RegisterPage() {
             <select
               value={grade}
               onChange={e => setGrade(e.target.value)}
-              className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:border-sky-400 outline-none bg-white"
+              className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:border-sky-400 outline-none bg-white text-gray-900"
             >
               <option value="">選んでください</option>
               {GRADES.map(g => <option key={g} value={g}>{g}</option>)}
