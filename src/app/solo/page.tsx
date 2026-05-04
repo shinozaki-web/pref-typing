@@ -209,7 +209,8 @@ export default function SoloPage() {
       .replace(/ti/g, "chi")
       .replace(/tu/g, "tsu")
       .replace(/nn/g, "n")
-      .replace(/oo/g, "o");
+      .replace(/oo/g, "o")
+      .replace(/ou/g, "o");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!currentId) return;
