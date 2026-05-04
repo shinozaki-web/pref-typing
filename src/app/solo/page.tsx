@@ -361,12 +361,12 @@ export default function SoloPage() {
       )}
 
       {/* 左：地図 */}
-      <div className="flex-1 p-2 min-h-0 overflow-hidden">
+      <div className="flex-1 p-0 min-h-0 overflow-hidden">
         <JapanMap colorMap={colorMap} targetId={currentId} preShownIds={PRE_SHOWN_IDS} />
       </div>
 
       {/* 右：操作パネル */}
-      <div className="w-full lg:w-80 flex flex-col gap-4 p-4 bg-white shadow-xl">
+      <div className="w-full lg:w-72 flex flex-col gap-4 p-4 bg-white shadow-xl">
 
         {/* タイマー */}
         <div className={`rounded-2xl p-4 text-center ${isUrgent && !paused ? "bg-red-100 border-2 border-red-400" : paused ? "bg-gray-100 border-2 border-gray-300" : "bg-sky-100"}`}>

@@ -55,6 +55,28 @@ function RegisterForm() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-400 to-sky-100 p-6">
       <div className="max-w-sm mx-auto space-y-6">
+
+        {/* ランキング */}
+        {ranking.length > 0 && (
+          <div className="bg-white rounded-3xl shadow-xl p-6">
+            <h3 className="text-lg font-black text-gray-800 mb-4 text-center">🏆 ソロランキング TOP10</h3>
+            <div className="space-y-2">
+              {ranking.map((r, i) => (
+                <div key={i} className={`flex items-center gap-3 px-3 py-2 rounded-xl ${i === 0 ? "bg-yellow-50 border border-yellow-200" : i === 1 ? "bg-gray-50 border border-gray-200" : i === 2 ? "bg-orange-50 border border-orange-200" : "bg-white border border-gray-100"}`}>
+                  <span className="text-lg font-black w-6 text-center">
+                    {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i + 1}`}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-gray-800 truncate">{r.pref_players?.nickname ?? "？"}</div>
+                    <div className="text-xs text-gray-400">{r.pref_players?.grade}</div>
+                  </div>
+                  <div className="font-black text-sky-600 tabular-nums">{formatTime(r.clear_time)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* 登録フォーム */}
         <div className="bg-white rounded-3xl shadow-xl p-8">
           <div className="text-center mb-6">
@@ -119,26 +141,6 @@ function RegisterForm() {
           </div>
         </div>
 
-        {/* ランキング */}
-        {ranking.length > 0 && (
-          <div className="bg-white rounded-3xl shadow-xl p-6">
-            <h3 className="text-lg font-black text-gray-800 mb-4 text-center">🏆 ソロランキング TOP10</h3>
-            <div className="space-y-2">
-              {ranking.map((r, i) => (
-                <div key={i} className={`flex items-center gap-3 px-3 py-2 rounded-xl ${i === 0 ? "bg-yellow-50 border border-yellow-200" : i === 1 ? "bg-gray-50 border border-gray-200" : i === 2 ? "bg-orange-50 border border-orange-200" : "bg-white border border-gray-100"}`}>
-                  <span className="text-lg font-black w-6 text-center">
-                    {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i + 1}`}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-gray-800 truncate">{r.pref_players?.nickname ?? "？"}</div>
-                    <div className="text-xs text-gray-400">{r.pref_players?.grade}</div>
-                  </div>
-                  <div className="font-black text-sky-600 tabular-nums">{formatTime(r.clear_time)}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </main>
   );
