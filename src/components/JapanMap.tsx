@@ -30,8 +30,12 @@ export default function JapanMap({ colorMap, targetId, onPrefClick, preShownIds 
   }, []);
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <svg viewBox="0 0 438 516" className="w-full h-full">
+    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+      <svg
+        viewBox="0 0 438 516"
+        className="w-full h-full"
+        style={{ transform: "rotate(12deg) scale(1.25)", transformOrigin: "center center" }}
+      >
         <defs>
           {/* 海グラデーション */}
           <radialGradient id="seaGrad" cx="38%" cy="32%" r="72%" gradientUnits="objectBoundingBox">

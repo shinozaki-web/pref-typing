@@ -59,7 +59,7 @@ const JapanMap = dynamic(() => import("@/components/JapanMap"), { ssr: false });
 
 const TOTAL_TIME = 300; // 5分
 const PASS_PENALTY = 15;
-const HINT_PENALTY = { 1: 5, 2: 10, 3: 20 } as const;
+const HINT_PENALTY = { 1: 0, 2: 10, 3: 20 } as const;
 
 // 最初から地図に表示するランドマーク県（タイピング対象外）
 const PRE_SHOWN_IDS = new Set(["hokkaido", "tokyo", "aichi", "osaka", "fukuoka", "okinawa"]);
@@ -276,7 +276,7 @@ export default function SoloPage() {
     nextPref(true);
   };
 
-  const handleHint = (lv: 1 | 2 | 3) => {
+  const handleHint = (lv: 2 | 3) => {
     const pen = HINT_PENALTY[lv];
     setUsedHints(prev => new Set([...prev, lv]));
     setPenalty(p => p + pen);
