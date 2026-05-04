@@ -173,7 +173,7 @@ export default function SoloPage() {
     // BGM開始
     const bgm = new Audio("/47bgm.mp3");
     bgm.loop = true;
-    bgm.volume = 0.25;
+    bgm.volume = 0.1;
     bgm.play();
     bgmRef.current = bgm;
   };
@@ -205,9 +205,11 @@ export default function SoloPage() {
 
   const normalizeRomaji = (s: string) =>
     s.toLowerCase().replace(/\s/g, "")
-      .replace(/si/g, "shi")   // し: si→shi
-      .replace(/ti/g, "chi")   // ち: ti→chi
-      .replace(/tu/g, "tsu");  // つ: tu→tsu
+      .replace(/si/g, "shi")
+      .replace(/ti/g, "chi")
+      .replace(/tu/g, "tsu")
+      .replace(/nn/g, "n")
+      .replace(/oo/g, "o");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!currentId) return;

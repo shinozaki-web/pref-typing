@@ -6,12 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "server": "node server/index.js",
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.104.1",
+    "@svg-maps/japan": "^2.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
     "next": "16.2.4",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
