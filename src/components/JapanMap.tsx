@@ -31,11 +31,7 @@ export default function JapanMap({ colorMap, targetId, onPrefClick, preShownIds 
 
   return (
     <div className="w-full h-full flex items-center justify-center overflow-hidden">
-      <svg
-        viewBox="0 0 438 516"
-        className="w-full h-full"
-        style={{ transform: "rotate(12deg) scale(1.25)", transformOrigin: "center center" }}
-      >
+      <svg viewBox="0 0 438 516" className="w-full h-full">
         <defs>
           {/* 海グラデーション */}
           <radialGradient id="seaGrad" cx="38%" cy="32%" r="72%" gradientUnits="objectBoundingBox">
@@ -138,6 +134,9 @@ export default function JapanMap({ colorMap, targetId, onPrefClick, preShownIds 
           <circle key={`foam-${i}`} cx={cx} cy={cy} r={r} fill="rgba(255,255,255,0.28)" />
         ))}
 
+        {/* 陸地グループ：回転・拡大 */}
+        <g transform="rotate(12, 219, 258) scale(1.22) translate(-18, -24)">
+
         {/* 都道府県パス */}
         {locations.map((loc) => {
           const isTarget = loc.id === targetId;
@@ -208,6 +207,8 @@ export default function JapanMap({ colorMap, targetId, onPrefClick, preShownIds 
                 </g>
               );
             })}
+
+        </g>{/* 陸地グループ終わり */}
 
         <style>{`
           @keyframes pulse-target {

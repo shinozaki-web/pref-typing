@@ -366,7 +366,7 @@ export default function SoloPage() {
       </div>
 
       {/* 右：操作パネル */}
-      <div className="w-full lg:w-72 flex flex-col gap-4 p-4 bg-white shadow-xl">
+      <div className="w-full lg:w-72 flex flex-col gap-4 p-4 bg-white shadow-xl overflow-y-auto">
 
         {/* タイマー */}
         <div className={`rounded-2xl p-4 text-center ${isUrgent && !paused ? "bg-red-100 border-2 border-red-400" : paused ? "bg-gray-100 border-2 border-gray-300" : "bg-sky-100"}`}>
