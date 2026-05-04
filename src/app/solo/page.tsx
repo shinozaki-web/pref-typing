@@ -360,9 +360,17 @@ export default function SoloPage() {
         </div>
       )}
 
-      {/* 左：地図 */}
-      <div className="flex-1 p-0 min-h-0 overflow-hidden">
-        <JapanMap colorMap={colorMap} targetId={currentId} preShownIds={PRE_SHOWN_IDS} />
+      {/* 左：地図＋豆知識 */}
+      <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <JapanMap colorMap={colorMap} targetId={currentId} preShownIds={PRE_SHOWN_IDS} />
+        </div>
+        {currentPref && (
+          <div className="px-3 py-2 bg-emerald-50 border-t border-emerald-200 flex gap-2 items-start">
+            <span className="text-emerald-600 font-bold text-sm shrink-0">📖</span>
+            <p className="text-sm text-gray-700 leading-snug">{currentPref.hints.lv1}</p>
+          </div>
+        )}
       </div>
 
       {/* 右：操作パネル */}

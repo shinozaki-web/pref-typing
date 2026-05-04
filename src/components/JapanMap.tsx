@@ -33,6 +33,9 @@ export default function JapanMap({ colorMap, targetId, onPrefClick, preShownIds 
     <div className="w-full h-full flex items-center justify-center overflow-hidden">
       <svg viewBox="0 0 438 516" className="w-full h-full">
         <defs>
+          <clipPath id="mapBounds">
+            <rect width="438" height="516" />
+          </clipPath>
           {/* 海グラデーション */}
           <radialGradient id="seaGrad" cx="38%" cy="32%" r="72%" gradientUnits="objectBoundingBox">
             <stop offset="0%" stopColor="#1e9fd4" />
@@ -134,8 +137,8 @@ export default function JapanMap({ colorMap, targetId, onPrefClick, preShownIds 
           <circle key={`foam-${i}`} cx={cx} cy={cy} r={r} fill="rgba(255,255,255,0.28)" />
         ))}
 
-        {/* 陸地グループ：回転・拡大 */}
-        <g transform="rotate(12, 219, 258) scale(1.22) translate(-18, -24)">
+        {/* 陸地グループ：回転・拡大（海の外にはみ出さないようclip） */}
+        <g transform="rotate(10, 219, 280) scale(1.15) translate(-14, -18)" clipPath="url(#mapBounds)">
 
         {/* 都道府県パス */}
         {locations.map((loc) => {

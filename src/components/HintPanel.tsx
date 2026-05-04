@@ -16,12 +16,6 @@ export default function HintPanel({ pref, onHintUse, usedLevels }: Props) {
 
   return (
     <div className="w-full space-y-2">
-      {/* lv1: 常時表示・ペナルティなし */}
-      <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2">
-        <div className="text-xs font-bold text-emerald-700 mb-1">📖 豆知識</div>
-        <p className="text-sm text-gray-700">{pref.hints.lv1}</p>
-      </div>
-
       {/* lv2・lv3: ボタンで開く */}
       <button
         onClick={() => setOpen(!open)}
