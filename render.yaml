@@ -2,6 +2,7 @@ services:
   - type: web
     name: pref-typing-server
     runtime: node
+    plan: free
     buildCommand: npm install
     startCommand: npm run server
     envVars:
@@ -11,6 +12,7 @@ services:
   - type: web
     name: pref-typing
     runtime: node
+    plan: free
     buildCommand: npm install && npm run build
     startCommand: npm run start
     envVars:
